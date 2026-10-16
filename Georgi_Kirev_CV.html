@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Georgi Kirev: QA Manual Tester</title>
+  <title>Georgi Kirev | Junior QA, Data Quality & Test Automation</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    * { box-sizing: border-box; }
+
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f7fb;
@@ -13,26 +15,29 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       min-height: 100vh;
     }
 
     .cv-container {
       display: grid;
-      grid-template-columns: 320px 1fr;
-      max-width: 1300px;
+      grid-template-columns: 300px minmax(0, 1fr);
+      width: calc(100% - 40px);
+      max-width: 1180px;
       background-color: #fff;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
       border-radius: 12px;
       overflow: hidden;
-      margin: 30px;
+      margin: 20px;
     }
 
     .left-side {
       background-color: #1f4e8c;
       color: #fff;
-      padding: 30px;
+      padding: 26px 24px;
+      min-width: 0;
     }
 
     .profile-pic {
@@ -42,137 +47,221 @@
       object-fit: cover;
       border: 3px solid #fff;
       display: block;
-      margin: auto auto 20px auto;
+      margin: 0 auto 18px auto;
     }
 
     .left-side h2 {
-      margin: 0;
-      font-size: 20px;
+      margin: 0 0 9px 0;
+      font-size: 17px;
       border-bottom: 1px solid rgba(255,255,255,0.4);
       padding-bottom: 5px;
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
       color: #ffeb3b;
     }
 
-    .info p {
-      margin: 6px 0;
-      font-size: 16px;
+    .info p, .skills li, .languages li, .certificates li {
+      margin: 5px 0;
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
     }
 
-    .info a {
-      color: #bcd3ff;
+    .info a, .left-side a {
+      color: #d9e6ff;
       text-decoration: none;
-      font-size: 16px;
     }
 
-    .skills, .hobbies, .languages {
-      margin-top: 25px;
-    }
-
-    .skills ul, .hobbies ul, .languages ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .skills li, .hobbies li, .languages li {
-      margin-bottom: 5px;
-      font-size: 16px;
-    }
+    .skills, .languages, .certificates { margin-top: 20px; }
+    .skills ul, .languages ul, .certificates ul { list-style: none; padding: 0; margin: 0; }
+    .skills li { margin-bottom: 4px; }
 
     .right-side {
-      padding: 40px;
+      padding: 30px 34px;
+      min-width: 0;
     }
 
     .right-side h1 {
-      font-size: 26px;
+      font-size: 28px;
+      line-height: 1.15;
       margin: 0;
       color: #1f4e8c;
     }
 
+    .headline {
+      margin: 6px 0 0 0;
+      color: #4b5563;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .section { margin-top: 17px; break-inside: avoid; }
+
     .right-side h3 {
-      margin-top: 25px;
+      margin: 0 0 7px 0;
       color: #1f4e8c;
       border-bottom: 2px solid #1f4e8c;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding-bottom: 3px;
-      font-size: 24px;
+      font-size: 17px;
     }
 
-    .section {
-      margin-top: 15px;
+    .right-side p, .right-side li {
+      margin: 5px 0;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
-    .section p {
-      margin: 8px 0;
-      font-size: 20px;
-      line-height: 1.6;
+    .right-side ul { margin: 5px 0 0 18px; padding: 0; }
+    .right-side li { padding-left: 1px; margin-bottom: 3px; }
+    a { color: #1f4e8c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .item-title { font-weight: 700; color: #27364b; }
+    .meta { color: #596579; font-size: 12px !important; }
+    .project { margin-top: 9px; }
+    .project p { margin-top: 3px; }
+    .compact { margin-top: 5px; }
+
+    @media (max-width: 760px) {
+      .cv-container { grid-template-columns: 1fr; width: calc(100% - 20px); margin: 10px; }
+      .left-side, .right-side { padding: 22px; }
     }
 
-    a {
-      color: #1f4e8c;
-      text-decoration: none;
+    /* A print toolbar gives control over CV density without changing the main design. */
+    .print-tools {
+      width: min(1180px, calc(100% - 40px));
+      margin: 18px 20px 0;
+      padding: 14px 18px;
+      background: #fff;
+      border: 1px solid #dbe3ee;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      color: #27364b;
+    }
+    .print-tools-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .print-tools label { font-size: 14px; font-weight: 600; }
+    .print-tools select, .print-tools button {
+      font: inherit; font-size: 14px; padding: 8px 10px;
+      border: 1px solid #bcc9da; border-radius: 6px; background: #fff; color: #27364b;
+    }
+    .print-tools button { background: #1f4e8c; color: #fff; border-color: #1f4e8c; cursor: pointer; font-weight: 600; }
+    .print-tools p { margin: 8px 0 0; color: #596579; font-size: 12px; line-height: 1.4; }
+
+    /* `size: auto` is intentional: a fixed A4 declaration can hide Chrome's
+       native Portrait/Landscape option. Let the print dialog choose orientation. */
+    @page { size: auto; margin: 5mm; }
+    @media print {
+      html, body { background: #fff; display: block; min-height: 0; margin: 0; padding: 0; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .print-tools { display: none !important; }
+      .cv-container {
+        width: 100%; max-width: none; margin: 0; border-radius: 0;
+        box-shadow: none; grid-template-columns: 26% minmax(0, 1fr);
+        overflow: visible;
+      }
+      .left-side { padding: 10px 10px; min-width: 0; }
+      .right-side { padding: 10px 13px; min-width: 0; }
+      .profile-pic { width: 72px; height: 72px; margin-bottom: 8px; }
+      .left-side h2 { font-size: 9.5pt; margin-bottom: 5px; padding-bottom: 3px; gap: 5px; }
+      .info p, .skills li, .languages li, .certificates li { font-size: 7.1pt; line-height: 1.15; margin: 2px 0; overflow-wrap: anywhere; }
+      .skills, .languages, .certificates { margin-top: 11px; }
+      .skills li { margin-bottom: 2px; }
+      .right-side h1 { font-size: 18pt; line-height: 1.08; }
+      .headline { font-size: 8.5pt; margin-top: 3px; }
+      .right-side h3 { font-size: 10.2pt; margin-bottom: 3px; padding-bottom: 2px; gap: 5px; }
+      .right-side p, .right-side li { font-size: 7.3pt; line-height: 1.16; margin: 2px 0; }
+      .right-side ul { margin: 3px 0 0 14px; }
+      .right-side li { padding-left: 0; margin-bottom: 1px; }
+      .section { margin-top: 6px; break-inside: avoid; }
+      .project { margin-top: 3px; break-inside: avoid; }
+      .project p { margin-top: 1px; }
+      a { color: inherit; text-decoration: none; }
+
+      /* Text-size presets are controlled by the toolbar before printing. */
+      html[data-print-size="standard"] .left-side h2 { font-size: 10pt; }
+      html[data-print-size="standard"] .info p,
+      html[data-print-size="standard"] .skills li,
+      html[data-print-size="standard"] .languages li,
+      html[data-print-size="standard"] .certificates li { font-size: 7.7pt; line-height: 1.2; }
+      html[data-print-size="standard"] .right-side h1 { font-size: 19pt; }
+      html[data-print-size="standard"] .headline { font-size: 9pt; }
+      html[data-print-size="standard"] .right-side h3 { font-size: 10.8pt; }
+      html[data-print-size="standard"] .right-side p,
+      html[data-print-size="standard"] .right-side li { font-size: 7.8pt; line-height: 1.2; }
+      html[data-print-size="standard"] .section { margin-top: 7px; }
+
+      html[data-print-size="large"] .left-side { padding: 12px 12px; }
+      html[data-print-size="large"] .right-side { padding: 12px 15px; }
+      html[data-print-size="large"] .profile-pic { width: 82px; height: 82px; }
+      html[data-print-size="large"] .left-side h2 { font-size: 10.5pt; }
+      html[data-print-size="large"] .info p,
+      html[data-print-size="large"] .skills li,
+      html[data-print-size="large"] .languages li,
+      html[data-print-size="large"] .certificates li { font-size: 8.2pt; line-height: 1.2; }
+      html[data-print-size="large"] .right-side h1 { font-size: 20pt; }
+      html[data-print-size="large"] .headline { font-size: 9.5pt; }
+      html[data-print-size="large"] .right-side h3 { font-size: 11.5pt; }
+      html[data-print-size="large"] .right-side p,
+      html[data-print-size="large"] .right-side li { font-size: 8.3pt; line-height: 1.22; }
+      html[data-print-size="large"] .section { margin-top: 8px; }
     }
 
-    a:hover {
-      text-decoration: underline;
+    /* Landscape has a wider but shorter page. Let sections use the available
+       space instead of forcing Education onto a second page. */
+    @media print and (orientation: landscape) {
+      .section, .project { break-inside: auto !important; }
+      .section { margin-top: 4px !important; }
+      .project { margin-top: 2px !important; }
+      .right-side { padding-top: 6px !important; padding-bottom: 6px !important; }
+    }
+
+    @media screen and (max-width: 760px) {
+      .print-tools { width: calc(100% - 20px); margin: 10px; }
+      .print-tools-row { align-items: stretch; }
     }
   </style>
 </head>
 <body>
+  <section class="print-tools" aria-label="CV print settings">
+    <div class="print-tools-row">
+      <label for="print-size">PDF text size:</label>
+      <select id="print-size" aria-label="PDF text size">
+        <option value="compact">Compact — safest for one page</option>
+        <option value="standard">Standard — balanced readability</option>
+        <option value="large" selected>Large — clearer text; tested on one page</option>
+      </select>
+      <button type="button" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+    <p>In the print dialog, choose A4 and use Layout for Portrait or Landscape. Large is the default for readability and fitted on one A4 page in a test preview; Compact is the fallback if your browser or settings cause an extra page.</p>
+  </section>
   <div class="cv-container">
-    <!-- LEFT SIDE -->
-    <div class="left-side">
-      <img src="Georgi_Picture.JPG" alt="Profile Photo" class="profile-pic" />
+    <!-- LEFT SIDE: keep the existing profile photo filename and circular presentation -->
+    <aside class="left-side">
+      <img src="Georgi_Picture.JPG" alt="Georgi Kirev profile photo" class="profile-pic" />
 
       <div class="info">
         <h2><i class="fas fa-address-card"></i> Contact</h2>
         <p><strong>Email:</strong> <a href="mailto:gimly6666@gmail.com">gimly6666@gmail.com</a></p>
-        <p><strong>Phone:</strong> Phone number will be provided upon request</p>
-        <p><strong>Address:</strong> Haskovo 6300, Bulgaria. Sofia Ready to Relocate!</p>
-        <p><strong>LinkedIn:</strong><br><a href="https://www.linkedin.com/in/georgi-kirev-264904378/" target="_blank">linkedin.com/in/georgi-kirev</a></p>
-        <p><strong>GitHub:</strong><br><a href="https://github.com/Georgi-Kirev" target="_blank">github.com/Georgi-Kirev</a></p>
-
-        <!-- ПРОМЯНАТА ЗА ВИЗУАЛИЗИРАНЕ НА СЕРТИФИКАТИТЕ Е ТУК -->
-        <p><strong>View SoftUni Certificates:</strong></p>
-        <p style="margin-top: -8px;">
-          <a href="https://softuni.bg/certificates/details/246867/d621a6de" target="_blank">C# Certificate</a><br>
-          <a href="https://softuni.bg/certificates/details/247026/fd00b24a" target="_blank">QA Certificate</a><br>
-          <a href="https://softuni.bg/certificates/details/252394/41286423" target="_blank">Software Technologies Certificate</a><br>
-          <a href="https://softuni.bg/certificates/details/255376/c92a1933" target="_blank">QA Fundamentals and Manual Testing Certificate</a><br>
-          <a href="https://softuni.bg/certificates/details/257500/2bd1bb86" target="_blank">Programming Fundamentals and Unit Testing Certificate</a><br>
-          <a href="https://softuni.bg/certificates/details/260299/bbc050ea" target="_blank">Programming Advanced for QA</a><br>
-          <a href="https://softuni.bg/certificates/details/264928/2f4a6101" target="_blank">Front-End Test Automaiton</a><br>
-        </p>
+        <p><strong>Phone:</strong> Available upon request</p>
+        <p><strong>Location:</strong> Haskovo, Bulgaria</p>
+        <p><strong>Work preferences:</strong> Hybrid preferred; open to relocation for the right opportunity.</p>
+        <p><strong>LinkedIn:</strong><br><a href="https://www.linkedin.com/in/georgi-kirev-264904378/" target="_blank" rel="noopener noreferrer">linkedin.com/in/georgi-kirev</a></p>
       </div>
 
       <div class="skills">
-        <h2><i class="fas fa-code"></i> Skills</h2>
+        <h2><i class="fas fa-code"></i> Key Skills</h2>
         <ul>
-          <li>Manual Testing (QA)</li>
-          <li>Jira, Trello</li>
-          <li>Git & GitHub</li>
-          <li>SQL Basics</li>
-          <li>HTML & CSS Basics</li>
-          <li>C# Basics</li>
-          <li>Problem Solver</li>
-          <li>Team Player</li>
-          <li>Quick Learner</li>
-        </ul>
-      </div>
-
-      <div class="hobbies">
-        <h2><i class="fas fa-gamepad"></i> Hobbies</h2>
-        <ul>
-          <li>Problem Solving</li>
-          <li>Technology Research</li>
-          <li>Learning New Tools</li>
-          <li>Gaming & Game Testing</li>
+          <li><strong>QA:</strong> Manual, functional and regression testing</li>
+          <li>Test cases, bug reports and test documentation</li>
+          <li><strong>Automation:</strong> C#, NUnit, Selenium WebDriver</li>
+          <li><strong>Data / AI project:</strong> Python, pytest, data validation</li>
+          <li><strong>API:</strong> Postman, REST API basics</li>
+          <li><strong>Tools:</strong> Jira, Qase, Trello, Git, GitHub</li>
+          <li><strong>Other:</strong> SQL basics, HTML, CSS, JavaScript</li>
+          <li><strong>Work systems:</strong> SAP and technical documentation</li>
         </ul>
       </div>
 
@@ -180,65 +269,109 @@
         <h2><i class="fas fa-language"></i> Languages</h2>
         <ul>
           <li>Bulgarian: Native</li>
-          <li>English: Working Proficiency</li>
+          <li>English: Working proficiency</li>
         </ul>
       </div>
-    </div>
+
+      <div class="certificates">
+        <h2><i class="fas fa-graduation-cap"></i> Certificates</h2>
+        <ul>
+          <li><a href="https://softuni.bg/certificates/details/246867/d621a6de" target="_blank" rel="noopener noreferrer">C#</a></li>
+          <li><a href="https://softuni.bg/certificates/details/247026/fd00b24a" target="_blank" rel="noopener noreferrer">QA</a></li>
+          <li><a href="https://softuni.bg/certificates/details/252394/41286423" target="_blank" rel="noopener noreferrer">Software Technologies</a></li>
+          <li><a href="https://softuni.bg/certificates/details/255376/c92a1933" target="_blank" rel="noopener noreferrer">QA Fundamentals and Manual Testing</a></li>
+          <li><a href="https://softuni.bg/certificates/details/257500/2bd1bb86" target="_blank" rel="noopener noreferrer">Programming Fundamentals and Unit Testing</a></li>
+          <li><a href="https://softuni.bg/certificates/details/260299/bbc050ea" target="_blank" rel="noopener noreferrer">Programming Advanced for QA</a></li>
+          <li><a href="https://softuni.bg/certificates/details/264928/2f4a6101" target="_blank" rel="noopener noreferrer">Front-End Test Automation</a></li>
+        </ul>
+      </div>
+    </aside>
 
     <!-- RIGHT SIDE -->
-    <div class="right-side">
-      <h1>Georgi Kirev</h1>
-      <p><em>Junior QA Manual Tester</em></p>
+    <main class="right-side">
+      <header>
+        <h1>Georgi Kirev</h1>
+        <p class="headline">Junior QA Tester | AI-Assisted Data Quality & Test Automation</p>
+      </header>
 
-      <div class="section">
+      <section class="section">
         <h3><i class="fas fa-user"></i> Profile</h3>
         <p>
-           Detail-oriented Junior QA Tester with 1+ year of hands-on training in manual testing, test
-           case creation, bug reporting, and documentation review. Skilled in browser-based testing,
-           Chrome DevTools, Jira, Qase, GitHub, and working with checklists and test suites. Solid
-           understanding of SDLC, Agile practices, and QA principles, with knowledge of C#, JavaScript on (Visual Studio and Visual Studio Code) and SQL.
-           Strong analytical thinking, attention to detail, and ability to identify non-conformities according
-           to requirements. Motivated to grow in Quality Assurance and contribute to reliable, high-quality
-           software through structured manual testing and effective team collaboration.
-          </p>
-      </div>
-
-      <div class="section">
-        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-        <p><strong>Software University (SoftUni)</strong><br>
-        <strong>Front End and Test Automation (SoftUni) May 2026(Ongoing):</strong> Work and Automation with Selenium, Appium, HTML, CSS, JavaScript, DOM, AJAX<br>
-        <strong>Programming Fundamentals & Unit Testing (SoftUni) Jan 2026(Finished):</strong> Fundamentals in programming (C#), building knowledge in unit testing, test scenarios, and logical thinking applicable to QA and automation testing.<br>
-        <strong>QA Fundamentals: September 2025 (Finished):</strong>  Deep understanding of QA methodologies, test documentation, bug reporting, and Agile workflow.<br>
-        <strong>Software Technologies: September 2025 (Finished):</strong> Overview of web development tools, REST APIs, and automation basics.<br>
-        <strong>QA Basics: June 2025:</strong> Manual testing principles, test design, bug tracking with Jira, and practical QA exercises.<br>
-        <strong>Programming Basics (C#): June 2025:</strong> Core programming logic, loops, conditionals, arrays, and algorithmic problem-solving.
+          QA tester with hands-on practice in manual testing, test case design, bug reporting, API testing and test automation. I use C#, NUnit and Selenium WebDriver in QA projects, and I am developing an AI-assisted data project with a focus on structured data and validation. My background in maintenance, manufacturing and SAP-related work brings a practical approach to troubleshooting, documentation and process accuracy. I am looking to grow in AI/Data QA and test automation while staying open to software and product-quality roles.
         </p>
-      </div>
+      </section>
 
-      <div class="section">
-        <h3><i class="fas fa-briefcase"></i> Work Experience and Projects</h3>
-        <p><strong>Position:</strong>Junior QA Manual and Automation Tester (Training / Internship Simulation)</p>
-        <p><strong>Company:</strong> Personal Portfolio / SoftUni Practical Project</p>
-        <p><strong>Duration:</strong> 1+ Year</p>
-        <p><strong>QA and Programming Repositories:</strong><br>
-        <a href="https://github.com/Georgi-Kirev/QualityAssurance" target="_blank">Georgi-Kirev/Quality Assurance</a></p>
-        <a href="https://github.com/Georgi-Kirev/C_Sharp_Projects" target="_blank">Georgi-Kirev/C# projects</a></p>
-        <a href="https://github.com/Georgi-Kirev/JavaScript_Projects" target="_blank">Georgi-Kirev/JavaScript projects</a></p>
-      </div>
+      <section class="section">
+        <h3><i class="fas fa-laptop-code"></i> Selected Projects</h3>
 
-      <div class="section">
-        <h3><i class="fas fa-briefcase"></i> Work Background</h3>
-        <p>
-          My previous work required strong attention to detail, reading technical documentation, and
-          following precise checklists — skills that naturally helped me transition into Quality Assurance.
-          After discovering my interest in identifying issues in software and games, I began studying QA,
-          manual testing, and basic programming at SoftUni. This experience developed my ability to
-          analyze requirements, detect non-conformities, and document findings clearly. I am now fully
-          focused on building my career as a QA Tester and applying structured testing practices in a
-          professional environment.
-         </p>
-      </div>
-    </div>
+        <div class="project">
+          <p class="item-title">AI-Assisted Property Data Project</p>
+          <p class="meta">Personal project | Python, automated tests, structured data, AI-assisted development</p>
+          <ul>
+            <li>Define requirements and guide an AI coding assistant to build a property-data pipeline and search API; review generated code against the intended behaviour.</li>
+            <li>Design and maintain regression checks for real issues, including duplicate data writes, incorrect handling of property-area fields and prices being converted to zero.</li>
+            <li>The project includes <strong>682 Python/pytest tests</strong> and is designed to run its test suite offline. This demonstrates how I manage AI-assisted development, investigate failures and verify that fixes prevent regressions.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <p class="item-title">QA and Test Automation Projects</p>
+          <p class="meta">SoftUni training and personal practice | C#, NUnit, Selenium WebDriver, Moq, Postman</p>
+          <ul>
+            <li>Created <strong>49 C# automated tests</strong> using NUnit, Moq and Selenium-related exercises, alongside manual test cases and Postman API collections.</li>
+            <li>Practice functional and regression testing, test-case design, assertions, boundary-value checks, bug reproduction, explicit waits and clear test documentation.</li>
+          </ul>
+          <p><a href="https://github.com/Georgi-Kirev/QualityAssurance" target="_blank" rel="noopener noreferrer">View QA and project code on GitHub</a></p>
+        </div>
+
+        <div class="project">
+          <p class="item-title">CNC Router Woodworking Projects — Personal</p>
+          <p class="meta">Vectric Aspire, Mach3 | Design-to-finished-part workflow</p>
+          <ul>
+            <li>Independently handle the full process for occasional woodworking projects: create the design and toolpaths, set up the CNC router, secure the material, run the job and finish the part.</li>
+            <li>Check the result against the intended design and adjust the setup or toolpath when needed.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <p class="item-title">Arduino Joystick — Personal Hardware Project</p>
+          <ul>
+            <li>Researched the solution, selected and purchased components, assembled the device, tested it and made changes after the first version.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3><i class="fas fa-briefcase"></i> Technical & Manufacturing Experience</h3>
+        <p class="item-title">Yazaki, Dimitrovgrad | Maintenance Technician → SAP Analyst / Maintenance Materials Coordination</p>
+        <ul>
+          <li>Worked in a manufacturing environment, including maintenance-related responsibilities and coordination of spare parts and maintenance materials through SAP.</li>
+          <li>Supported stock tracking, parts planning and ordering, supplier coordination, and preventive-maintenance follow-up.</li>
+          <li>Built habits around process discipline, accurate records, technical documentation and following established procedures.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+        <p><strong>Software University (SoftUni)</strong></p>
+        <ul class="compact">
+          <li><strong>Front-End and Test Automation</strong> — ongoing; Selenium, Appium, HTML, CSS, JavaScript, DOM and AJAX.</li>
+          <li><strong>Programming Fundamentals & Unit Testing</strong> — completed; C# fundamentals, test scenarios and unit-testing concepts.</li>
+          <li><strong>QA Fundamentals and Manual Testing</strong> — completed; test design, documentation, bug reporting and Agile workflow.</li>
+          <li><strong>Software Technologies</strong> — completed; web technologies, REST APIs and automation basics.</li>
+        </ul>
+      </section>
+    </main>
   </div>
+  <script>
+    (function () {
+      const sizeSelect = document.getElementById('print-size');
+      if (!sizeSelect) return;
+      document.documentElement.dataset.printSize = sizeSelect.value;
+      sizeSelect.addEventListener('change', function () {
+        document.documentElement.dataset.printSize = sizeSelect.value;
+      });
+    })();
+  </script>
 </body>
 </html>
